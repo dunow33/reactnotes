@@ -4,10 +4,9 @@ import './NoteForm.css';
 class NoteForm extends Component{
 	constructor(props){
 		super(props);
-		this.addNote = this.addNote.bind(this);
 
 		this.state = {
-			newNoteContent: '',
+			newNoteContent: ''
 		};
 		this.handleUserInput = this.handleUserInput.bind(this);
 		this.writeNote = this.writeNote.bind(this);

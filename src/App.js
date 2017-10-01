@@ -3,6 +3,8 @@ import logo from './logo.svg';
 import Note from './Note/Note';
 import NoteForm from './NoteForm/NoteForm';
 import './App.css';
+import { DB_CONFIG } from './config/config';
+import firebase from 'firebase/app';
 
 class App extends Component {
 
@@ -10,17 +12,18 @@ class App extends Component {
     super(props);
 
     this.addNote = this.addNote.bind(this);
+
+    this.app = firebase.initializeApp(DB_CONFIG);
+    this.db = this.app.database().ref().child('notes');
+
     this.state = {
-      notes: [
-      { id: 1, noteContent: "Note 1 here!!" },
-      { id: 2, noteContent: "Note 2 here!!" },
-      ],
+      notes: [],
     }
   }
 
   addNote(note){
     const previousNotes = this.state.notes;
-    previousNotes.push(note);
+    previousNotes.push({ id: previousNotes.length + 1, noteContent: note });
     this.setState({
       notes: previousNotes
     })
