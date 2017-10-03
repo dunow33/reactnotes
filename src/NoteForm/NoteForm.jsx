@@ -31,13 +31,19 @@ class NoteForm extends Component{
         })
     }
 
+    handleKeyPress = (event) => {
+  		if(event.key === 'Enter'){
+    		this.writeNote();
+  		}
+	}
+
     render(){
         return(
             <div className="formWrapper">
                 <input className="noteInput"
                 placeholder="Write a new note..."
                 value={this.state.newNoteContent} 
-                onChange={this.handleUserInput} />
+                onChange={this.handleUserInput} onKeyPress={this.handleKeyPress} />
                 <button className="noteButton"
                 onClick={this.writeNote}>Add Note</button>
             </div>
