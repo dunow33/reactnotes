@@ -64,7 +64,7 @@ class App extends Component {
         <div className="notesHeader">
           <div className="heading">React & Firebase To-Do List</div>
         </div>
-        <div className="notesBody">>
+        <div className="notesBody">
           {
             this.state.notes.map((note) => {
               return (
