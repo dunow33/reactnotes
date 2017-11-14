@@ -18,6 +18,10 @@ class Note extends Component{
     render(){
         return(
             <div className="note fade-in">
+                <span 
+                      onClick={() => this.handleEditNote(this.noteId)}>
+                      Edit
+                </span>
                 <span className="closebtn" 
                       onClick={() => this.handleRemoveNote(this.noteId)}>
                       &times;

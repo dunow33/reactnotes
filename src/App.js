@@ -23,29 +23,26 @@ class App extends Component {
   }
 
   componentWillMount(){
-    const previousNotes = this.state.notes;
 
     // DataSnapshot
     this.database.on('child_added', snap => {
-      previousNotes.push({
+
+      const newNotes = this.state.notes.concat([{
         id: snap.key,
         noteContent: snap.val().noteContent,
-      })
+      }])
 
       this.setState({
-        notes: previousNotes
+        notes: newNotes
       })
     })
 
     this.database.on('child_removed', snap => {
-      for(var i=0; i < previousNotes.length; i++){
-        if(previousNotes[i].id === snap.key){
-          previousNotes.splice(i, 1);
-        }
-      }
+
+      const newNotes = this.state.notes.filter(note => note.id !== snap.key)
 
       this.setState({
-        notes: previousNotes
+        notes: newNotes
       })
     })
   }
@@ -56,6 +53,7 @@ class App extends Component {
 
   removeNote(noteId){
     this.database.child(noteId).remove();
+    
   }
 
   render() {
